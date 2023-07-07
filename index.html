@@ -32,16 +32,21 @@
     <button onclick="nextQuestion()">SUBMIT</button>
     <script>
         // Function to clear the quiz score from local storage
-function clearQuizScore() {
-    localStorage.removeItem("Station_22_Score");
-}
+        function clearQuizScore() {
+            localStorage.removeItem("Station_22_Score");
+        }
 
-// Function to clear local storage when the tab is closed or refreshed
-window.addEventListener('beforeunload', function() {
-    clearQuizScore();
-});
+        // Function to clear local storage when the tab is closed or refreshed
+        window.addEventListener('beforeunload', function() {
+            clearQuizScore();
+        });
 
-// Rest of your existing code...
+        // Function to start the timer for clearing the score after 20 minutes
+        function startTimer() {
+            setTimeout(clearQuizScore, 20 * 60 * 1000); // 20 minutes in milliseconds
+        }
+
+        // Rest of your existing code...
 
         // Quiz questions and answers
         const quiz = [
@@ -78,28 +83,30 @@ window.addEventListener('beforeunload', function() {
                 optionsElement.appendChild(label);
                 optionsElement.appendChild(document.createElement("br"));
             }
+
+            startTimer(); // Start the timer after displaying the question
         }
 
         // Function to check the answer and update score
         function checkAnswer() {
-    const options = document.getElementsByName("option");
-    let selectedOption = -1;
-    let isAnswered = false;
+            const options = document.getElementsByName("option");
+            let selectedOption = -1;
+            let isAnswered = false;
 
-    for (let i = 0; i < options.length; i++) {
-        if (options[i].checked) {
-            selectedOption = parseInt(options[i].value);
-            isAnswered = true;
-            break;
+            for (let i = 0; i < options.length; i++) {
+                if (options[i].checked) {
+                    selectedOption = parseInt(options[i].value);
+                    isAnswered = true;
+                    break;
+                }
+            }
+
+            if (!isAnswered || selectedOption !== quiz[currentQuestion].answer) {
+                Station_22_Score = 0; // Assign zero score if question is not attempted or answered incorrectly
+            } else {
+                Station_22_Score++; // Increment score for correct answer
+            }
         }
-    }
-
-    if (!isAnswered || selectedOption !== quiz[currentQuestion].answer) {
-        Station_22_Score = 0; // Assign zero score if question is not attempted or answered incorrectly
-    } else {
-        Station_22_Score++; // Increment score for correct answer
-    }
-}
 
         // Function to move to the next question
         function nextQuestion() {
