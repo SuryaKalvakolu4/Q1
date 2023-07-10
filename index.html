@@ -36,15 +36,15 @@
             localStorage.removeItem("Station_22_Score");
         }
 
-        // Function to clear local storage when the tab is closed or refreshed
-        window.addEventListener('beforeunload', function() {
-            clearQuizScore();
-        });
-
-        // Function to start the timer for clearing the score after 20 minutes
-        function startTimer() {
-            setTimeout(clearQuizScore, 20 * 60 * 1000); // 20 minutes in milliseconds
+        // Function to clear local storage after 5 minutes of tab being closed
+        function clearLocalStorageAfterDelay() {
+            setTimeout(clearQuizScore, 5 * 60 * 1000); // 5 minutes in milliseconds
         }
+
+        // Function to clear local storage when the tab is closed
+        window.addEventListener('beforeunload', function() {
+            clearLocalStorageAfterDelay();
+        });
 
         // Rest of your existing code...
 
