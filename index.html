@@ -26,14 +26,14 @@
     </style>
 </head>
 <body>
-    <h1>Station 22</h1>
+    <h1>Pressure Boosting Device</h1>
     <div id="question"></div>
     <div id="options"></div>
     <button onclick="nextQuestion()">SUBMIT</button>
     <script>
         // Function to clear the quiz score from local storage
         function clearQuizScore() {
-            localStorage.removeItem("Station_22_Score");
+            localStorage.removeItem("Pressure_Boosting_Device");
         }
 
         // Function to clear local storage after 5 minutes of tab being closed
@@ -52,13 +52,13 @@
         const quiz = [
             {
                 question: "Do you also know from how many wells the raw water to be treated enters the waterworks?",
-                options: ["3 WELLS", "5 WELLS", "7 WELLS"],
+                options: ["3 Wells", "5 Wells", "7 Wells"],
                 answer: 0
             }
         ];
 
         let currentQuestion = 0;
-        let Station_22_Score = 0;
+        let Pressure_Boosting_Device = 0;
 
         // Function to display current question
         function displayQuestion() {
@@ -102,9 +102,9 @@
             }
 
             if (!isAnswered || selectedOption !== quiz[currentQuestion].answer) {
-                Station_22_Score = 0; // Assign zero score if question is not attempted or answered incorrectly
+                Pressure_Boosting_Device = 0; // Assign zero score if question is not attempted or answered incorrectly
             } else {
-                Station_22_Score++; // Increment score for correct answer
+                Pressure_Boosting_Device++; // Increment score for correct answer
             }
         }
 
@@ -115,8 +115,8 @@
 
             if (currentQuestion === quiz.length) {
                 // All questions answered, store score in local storage
-                localStorage.setItem("Station_22_Score", Station_22_Score);
-                alert("Quiz completed. Your score is " + Station_22_Score);
+                localStorage.setItem("Pressure_Boosting_Device", Pressure_Boosting_Device);
+                alert("Quiz completed. Your score is " + Pressure_Boosting_Device);
             } else {
                 displayQuestion();
             }
